@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'IndexController@index')->name('site.index');
 Route::get('/contato', 'IndexController@contato')->name('site.contato');
 Route::get('/checkout', 'IndexController@checkout')->name('site.checkout');
-Route::get('/store','IndexController@store')->name('site.store');
-Route::get('/product','IndexController@product')->name('site.product');
-Route::get('/consumir','ConsumirController@consumir')->name('site.consumir');
+Route::get('/store/enxovais','IndexController@StoreEnxovais')->name('site.enxovais');
+Route::get('/store/cosmeticos','IndexController@StoreCosmeticos')->name('site.cosmeticos');
+Route::get('/store/roupas','IndexController@StoreRoupas')->name('site.roupas');
+Route::get('/product/{id}','IndexController@product')->name('site.product');
+

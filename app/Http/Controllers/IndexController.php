@@ -16,10 +16,16 @@ class IndexController extends Controller
     public function checkout() {
         return view('checkout');
     }
-    public function store() {
-        return view('store');
+    public function StoreEnxovais() {
+        return view('StoreEnxovais');
     }
-    public function product() {
+    public function StoreCosmeticos() {
+        return view('StoreCosmeticos');
+    }
+    public function StoreRoupas() {
+        return view('StoreRoupas');
+    }
+    public function product($id) {
         return view('product');
     } 
 }
