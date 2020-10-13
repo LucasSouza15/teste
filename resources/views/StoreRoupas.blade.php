@@ -93,46 +93,49 @@
 
 						<!-- store products -->
 						<div class="row">
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="{{asset('app-assets/img/product01.png')}}" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span>
-											<span class="new">NEW</span>
+							@foreach ($products as $product)
+								@if ($product->categoria == 'Roupas')
+										<!-- product -->
+									<div class="col-md-4 col-xs-6">
+										<div class="product">
+											<div class="product-img">
+														<img src="{{asset($product->caminho_foto)}}" alt="">
+												<div class="product-label">
+													<span class="sale">-30%</span>
+													<span class="new">NEW</span>
+												</div>
+											</div>
+											<div class="product-body">
+												<p class="product-category">{{$product->categoria}}</p>
+												<h3 class="product-name"><a href="#">{{$product->produto}}</a></h3>
+												<h4 class="product-price">{{$product->preco}}<del class="product-old-price">$990.00</del></h4>
+												<div class="product-rating">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="product-btns">
+													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Salvar</span></button>
+													<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Adicionar ao carrinho</span></button>
+													<!-- Botões de comparar e olhar
+													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+													-->
+												</div>
+											</div>
+											<div class="add-to-cart">
+												<a href="{{route('site.product', $product->codico_produto)}}">
+													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Comprar</button>
+												</a>
+											</div>
 										</div>
 									</div>
-									<div class="product-body">
-										<p class="product-category">Categoria</p>
-										<h3 class="product-name"><a href="#">Nome do Produto</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Salvar</span></button>
-											<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Adicionar ao carrinho</span></button>
-											<!-- Botões de comparar e olhar
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-											-->
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<a href="{{route('site.product','10')}}">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Comprar</button>
-										</a>
-									</div>
-								</div>
-							</div>
-							<!-- /product -->
-
-							
+									<!-- /product -->
+								@endif
+								
+							@endforeach
 						</div>
 						<!-- /store products -->
 

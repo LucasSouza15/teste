@@ -1,10 +1,10 @@
+
+
 @extends('layouts.app')
 @section('conteudo')
 
 	
-
-
-		<!-- SECTION -->
+			<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -14,19 +14,19 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product01.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto1)}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product03.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto2)}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product06.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto3)}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product08.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto4)}}" alt="" max-width="100%">
 							</div>
 						</div>
 					</div>
@@ -36,28 +36,29 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product01.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto1)}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product03.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto2)}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product06.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto3)}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{asset('app-assets/img/product08.png')}}" alt="">
+								<img src="{{asset($products->caminho_foto4)}}" alt="">
 							</div>
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
 
+				
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">Nome do produto</h2>
+							<h2 class="product-name">{{$products->produto}}</h2>
 							<div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -69,23 +70,33 @@
 								<a class="review-link" href="#">10 Review(s) | Adicionar sua opnião</a>
 							</div>
 							<div>
-								<h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
-								<span class="product-available">Em estoque</span>
+								<h3 class="product-price">{{$products->preco}}		<del class="product-old-price">		$990.00</del></h3>
+								<span class="product-available">
+									Em estoque : {{$total}} itens
+								</span>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<p>{{$products->descricao}}</p>
 
+						<form action="{{route('site.checkout',$products->codico_produto)}}" method="post">
+							@csrf
 							<div class="product-options">
 								<label>
-									Tamanho
-									<select class="input-select">
-										<option value="0">X</option>
+									Tamanho 
+									<select name="tamanho" class="input-select">
+										@foreach ($estoques as $estoque)
+											<option value="{{$estoque->tamanho}}">{{$estoque->tamanho}}</option>
+										@endforeach
 									</select>
+								
+										@foreach ($estoques as $estoque)
+											<span style="font-size: 10px;">{{$estoque->tamanho}}</span>
+											<span style="font-size: 10px;">({{$estoque->Qtd}}) </span>
+										@endforeach	
+							
 								</label>
+								
 								<label>
-									Cor
-									<select class="input-select">
-										<option value="0">Red</option>
-									</select>
+									Cor: Pergunte ao vendedor quais cores tem disponiveis. 
 								</label>
 							</div>
 
@@ -93,24 +104,21 @@
 								<div class="qty-label">
 									QTD
 									<div class="input-number">
-										<input type="number">
+										<input name="qtd"type="number" value="1">
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
 								</div>
-								<a href="{{route('site.checkout')}}">
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Finalizar Compra</button>
-								</a>
+								<button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Finalizar Compra</button>
 							</div>
-
+						</form>
 							<ul class="product-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> Salvar</a></li>
 							</ul>
 
 							<ul class="product-links">
 								<li>Categorias:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
+								<li><a href="{{route('site.roupas')}}">{{$products->categoria}}</a></li>
 							</ul>
 
 							<ul class="product-links">
@@ -142,7 +150,7 @@
 								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+											<p>{{$products->detalhes}}</p>
 										</div>
 									</div>
 								</div>
@@ -345,146 +353,52 @@
 
 					<div class="col-md-12">
 						<div class="section-title text-center">
-							<h3 class="title">produtos relacionados</h3>
+							<h3 class="title">Produtos relacionados</h3>
 						</div>
 					</div>
 
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('app-assets/img/product01.png')}}" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
+					@foreach ($productRelacionados as $productRelacionado)
+						@if ($productRelacionado->categoria == $products->categoria)
+							
+									<!-- product -->
+							<div class="col-md-3 col-xs-6">
+								<div class="product">
+									<div class="product-img">
+										<img src="{{asset('app-assets/img/product01.png')}}" alt="">
+										<div class="product-label">
+											<span class="sale">-30%</span>
+										</div>
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{$productRelacionado->categoria}}</p>
+										<h3 class="product-name"><a href="#">{{$productRelacionado->produto}}</a></h3>
+										<h4 class="product-price">{{$productRelacionado->preco}} <del class="product-old-price">$990.00</del></h4>
+										<div class="product-rating">
+										</div>
+										<div class="product-btns">
+											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Salvar</span></button>
+											<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Adicionar ao carrinho</span></button>
+											<!-- Botões de comparar e olhar
+											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											-->
+										</div>
+									</div>
+									<div class="add-to-cart">
+										<a href="{{route('site.product', $productRelacionado->codico_produto)}}">
+											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Comprar</button>
+										</a>
+									</div>
 								</div>
 							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Salvar</span></button>
-									<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Adicionar ao carrinho</span></button>
-									<!-- Botões de comparar e olhar
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-									-->
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<a href="{{route('site.product','10')}}">
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Comprar</button>
-								</a>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+							<!-- /product -->
+							
+						@endif
+						
+					@endforeach	
 					
 
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('app-assets/img/product01.png')}}" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Salvar</span></button>
-									<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Adicionar ao carrinho</span></button>
-									<!-- Botões de comparar e olhar
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-									-->
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<a href="{{route('site.product','10')}}">
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Comprar</button>
-								</a>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('app-assets/img/product01.png')}}" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Salvar</span></button>
-									<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Adicionar ao carrinho</span></button>
-									<!-- Botões de comparar e olhar
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-									-->
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<a href="{{route('site.product','10')}}">
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Comprar</button>
-								</a>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('app-assets/img/product01.png')}}" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Salvar</span></button>
-									<button class="add-to-compare"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Adicionar ao carrinho</span></button>
-									<!-- Botões de comparar e olhar
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-									-->
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<a href="{{route('site.product','10')}}">
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Comprar</button>
-								</a>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
 					
-
 				</div>
 				<!-- /row -->
 			</div>
@@ -492,40 +406,5 @@
 		</div>
 		<!-- /Section -->
 
-		<!-- NEWSLETTER 
-		<div id="newsletter" class="section">
-			 container 
-			<div class="container">
-				 row 
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				 /row 
-			</div>
-			 /container 
-		</div>
-		 /NEWSLETTER 
-
-@endsection
+@endsection 
+<script src="//code.jivosite.com/widget/iDwWZmXzDr" async></script>
