@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 
 /**
  * Usuarios 
@@ -30,11 +32,8 @@ Route::get('/product/{id}','IndexController@product')->name('site.product');
  * 
  * Admin 
  */
-
-Route::get('/admin/login', 'AdminController@login')->name('admin.login');
-Auth::routes();
+Route::get('/admin/login', 'admin\AdminController@login')->name('admin.login');
 Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-
 
 
 

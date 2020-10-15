@@ -84,10 +84,12 @@
 									</select>
 								</label>
 							</div>
-							<ul class="store-grid">
-								<li class="active"><i class="fa fa-th"></i></li>
-								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-							</ul>
+							<!--
+								<ul class="store-grid">
+									<li class="active"><i class="fa fa-th"></i></li>
+									<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+								</ul>
+							-->
 						</div>
 						<!-- /store top filter -->
 
@@ -99,7 +101,7 @@
 									<div class="col-md-4 col-xs-6">
 										<div class="product">
 											<div class="product-img">
-														<img src="{{asset($product->caminho_foto)}}" alt="">
+														<img src="{{asset($product->caminho_foto1)}}" alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span>
 													<span class="new">NEW</span>
@@ -137,9 +139,11 @@
 								
 							@endforeach
 						</div>
+						
+						{{ $products->links() }}
 						<!-- /store products -->
 
-						<!-- store bottom filter -->
+						<!-- store bottom filter 
 						<div class="store-filter clearfix">
 							
 							<ul class="store-pagination">
@@ -150,7 +154,7 @@
 								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
 							</ul>
 						</div>
-						<!-- /store bottom filter -->
+						 /store bottom filter -->
 					</div>
 					<!-- /STORE -->
 				</div>

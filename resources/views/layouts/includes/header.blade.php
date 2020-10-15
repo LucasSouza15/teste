@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>Site Mãe</title>
-    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
     <!-- Styles HOME --> 
 
@@ -112,8 +115,34 @@
                     <li><a href="#"><i class="fa fa-map-marker"></i> Goiânia- GO</a></li>
                 </ul>
                 <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                    <li><a href="#"><i class="fa fa-user-o"></i> Minha conta</a></li>
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Cadastre-se') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-dark" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Sair') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
                 </ul>
             </div>
         </div>
@@ -235,12 +264,12 @@
 				<!-- responsive-nav -->
 				<div id="responsive-nav" >
 					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-                        <li class="active"><a href="{{route('site.index')}}">Inicio</a></li>
-                        <li><a href="{{route('site.enxovais')}}">Enxovais</a></li>
-                        <li><a href="{{route('site.cosmeticos')}}">Cosmeticos</a></li>
-                        <li><a href="{{route('site.roupas')}}">Vestuario</a></li>
-                        <li><a href="{{route('site.contato')}}">Contato</a></li>
+					<ul class="main-nav nav">
+                        <li class="nav-item"><a href="{{route('site.index')}}" class="nav-link">Inicio</a></li>
+                        <li class="nav-item"><a href="{{route('site.enxovais')}}" class="nav-link">Enxovais</a></li>
+                        <li class="nav-item"><a href="{{route('site.cosmeticos')}}" class="nav-link">Cosmeticos</a></li>
+                        <li class="nav-item"><a href="{{route('site.roupas')}}" class="nav-link">Vestuario</a></li>
+                        <li class="nav-item"><a href="{{route('site.contato')}}" class="nav-link">Contato</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -248,4 +277,7 @@
 			</div>
 			<!-- /container -->
 		</nav>
-		<!-- /NAVIGATION -->
+        <!-- /NAVIGATION -->
+        <main class="py-4">
+            @yield('content')
+        </main>

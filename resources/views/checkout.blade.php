@@ -78,7 +78,7 @@
 					<!-- Order Details -->
 					<div class="col-md-5 order-details">
 						<div class="section-title text-center">
-							<h3 class="title">Seu pedido</h3>
+							<h3 class="title">{{$products->produto}}</h3>
 						</div>
 						<div class="order-summary">
 							<div class="order-col">

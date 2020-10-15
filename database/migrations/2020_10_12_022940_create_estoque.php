@@ -13,7 +13,7 @@ class CreateEstoque extends Migration
      */
     public function up()
     {
-        Schema::create('estoques', function (Blueprint $table) {
+        Schema::create('estoque', function (Blueprint $table) {
             $table->id();
             $table->integer('codico_produto')->nullable();
             $table->foreign('codico_produto')->references('codico_produto')->on('produtos');

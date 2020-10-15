@@ -17,7 +17,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Coleção de <br>Enxovais</h3>
-								<a href="#" class="cta-btn">Compre agora <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="{{route('site.enxovais')}}" class="cta-btn">Compre agora <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Coleção de<br>Perfumaria</h3>
-								<a href="#" class="cta-btn">Compre agora <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="{{route('site.cosmeticos')}}" class="cta-btn">Compre agora <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -45,7 +45,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Coleção de<br>Roupas</h3>
-								<a href="#" class="cta-btn">Compre agora <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="{{route('site.roupas')}}" class="cta-btn">Compre agora <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>

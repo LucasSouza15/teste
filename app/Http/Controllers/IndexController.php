@@ -61,7 +61,7 @@ class IndexController extends Controller
         ]);
     }
     public function StoreRoupas() {
-        $products = Produtos::paginate();
+        $products = Produtos::paginate(9);
         return view('StoreRoupas', [
             'products' => $products,
         ]);
