@@ -80,7 +80,7 @@
  		<!-- Font Awesome Icon -->
  		<link rel="stylesheet" href="{{asset('app-assets/css/font-awesome.min.css')}}">
  		<!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href={{asset('app-assets/css/style.css')}}"/>
+        <link type="text/css" rel="stylesheet" href="{{asset('app-assets/css/style.css')}}"/>
          
     <!-- Layout PRODUCTS --> 
     
@@ -125,23 +125,27 @@
                         </li>
                     @endif
                 @else
+                <li></li>
                     <li class="nav-item dropdown">
+                        
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a href="{{route('admin.dashboard')}}" class="dropdown-item text-dark">Entrar no painel</a>
                             <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Sair') }}
                             </a>
-
+                            
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
                     </li>
+                    
                 @endguest
                 </ul>
             </div>
