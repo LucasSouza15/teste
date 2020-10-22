@@ -20,11 +20,6 @@ class CreateProdutosTable extends Migration
             $table->text('descricao')->nullable();
             $table->double('preco', 8,2)->nullable();
             $table->string('detalhes')->nullable();
-            $table->string('cor')->nullable();
-            $table->string('caminho_foto1')->nullable();
-            $table->string('caminho_foto2');
-            $table->string('caminho_foto3');
-            $table->string('caminho_foto4');
             $table->string('categoria')->nullable();
             $table->timestamps();
         });

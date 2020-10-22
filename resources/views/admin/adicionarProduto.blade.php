@@ -6,128 +6,66 @@
   </div>
 
   <div class="border rounded p-4">
-      <form class="form" action="" method="post" enctype="multipart/form-data">
+        <form class="form" action="{{route('admin.adicionaProduto')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-row">
+
+            <!-- Imagem 1 -->
+            <div class="col-12 d-flex align-items-center ">
+              <label for="selecao-arquivo1" style="background-color: #3498db;border-radius: 5px;color: #fff;cursor: pointer;margin: 10px;padding: 6px 20px">Adicionar fotos </label>
+              <input type="file" id="selecao-arquivo1" style="display:none" name="img[]" multiple>
+            </div>
+
           <div class="col-6 d-flex align-items-center">
-            <label for="">Nome do produto : </label>
-            <input type="text" class="form-control">
+            <label for="">Nome do produto</label>
+            <input type="text" class="form-control" name="produto">
           </div>
 
-          <div class="col-3 d-flex align-items-center">
-            <label for="">Preço antigo: </label>
-            <input type="text" class="form-control">
+          <div class="col-2 d-flex align-items-center my-2">
+            <label for="">Codico</label>
+            <input type="text" class="form-control" name="codico">
+          </div>
+
+          <div class="col-2 d-flex align-items-center">
+            <label for="">Preço antigo </label>
+            <input type="text" class="form-control" name="preco_antigo">
           </div>
 
          
-          <div class="col-3 d-flex align-items-center">
-            <label for="">Preço atual: </label>
-            <input type="text" class="form-control">
-          </div>
-
-          <div class="col-4 d-flex align-items-center">
-            <label for="">Codico do Produto</label>
-            <input type="text" class="form-control">
-          </div>
-
-          <div class="col-8 d-flex align-items-center">
-            <label for="">Descrição do produto </label>
-            <textarea class="form-control" name="" id="" cols="100" rows="3"></textarea>
-          </div>
-            <!-- Imagem 1 -->
-          <div class="col-3 d-flex align-items-center">
-              <label for="selecao-arquivo1" style="background-color: #3498db;border-radius: 5px;color: #fff;cursor: pointer;margin: 10px;padding: 6px 20px">Adicionar foto 1</label>
-              <input type="file" id="selecao-arquivo1" style="display:none">
-              <img id="img1" style="width:100px;" class="m-1">
+          <div class="col-2 d-flex align-items-center">
+            <label for="">Preço atual </label>
+            <input type="text" class="form-control" name="preco _atual">
           </div>
           
-          <script>
-            $(function(){
-              $('#selecao-arquivo1').change(function(){
-                const file = $(this)[0].files[0]
-                const fileReader = new FileReader()
-                fileReader.onloadend = function() {
-                    $('#img1').attr('src', fileReader.result)
-                }
-                fileReader.readAsDataURL(file)
-              })
-            })
-          </script>
-
-           <!-- Imagem 2 -->
-
-          <div class="col-3 d-flex align-items-center">
-            <label for="selecao-arquivo2" style="background-color: #3498db;border-radius: 5px;color: #fff;cursor: pointer;margin: 10px;padding: 6px 20px">Adicionar foto 2</label>
-            <input type="file" id="selecao-arquivo2" style="display:none">
-            <img id="img2" style="width:100px;" class="m-1">
-          </div>
-
-          <script>
-          $(function(){
-            $('#selecao-arquivo2').change(function(){
-              const file = $(this)[0].files[0]
-              const fileReader = new FileReader()
-              fileReader.onloadend = function() {
-                  $('#img2').attr('src', fileReader.result)
-              }
-              fileReader.readAsDataURL(file)
-            })
-          })
-          </script>
-
-           <!-- Imagem 3 -->
-
-          <div class="col-3 d-flex align-items-center">
-            <label for="selecao-arquivo3" style="background-color: #3498db;border-radius: 5px;color: #fff;cursor: pointer;margin: 10px;padding: 6px 20px">Adicionar foto 3</label>
-            <input type="file" id="selecao-arquivo3" style="display:none">
-            <img id="img3" style="width:100px;" class="m-1">
-          </div>
-
-          <script>
-          $(function(){
-            $('#selecao-arquivo3').change(function(){
-              const file = $(this)[0].files[0]
-              const fileReader = new FileReader()
-              fileReader.onloadend = function() {
-                  $('#img3').attr('src', fileReader.result)
-              }
-              fileReader.readAsDataURL(file)
-            })
-          })
-          </script>
-
-             <!-- Imagem 4 -->
-
-          <div class="col-3 d-flex align-items-center">
-            <label for="selecao-arquivo4" style="background-color: #3498db;border-radius: 5px;color: #fff;cursor: pointer;margin: 10px;padding: 6px 20px">Adicionar foto 4</label>
-            <input type="file" id="selecao-arquivo4" style="display:none">
-            <img id="img4" style="width:100px;" class="m-1">
-          </div>
-
-          <script>
-          $(function(){
-            $('#selecao-arquivo4').change(function(){
-              const file = $(this)[0].files[0]
-              const fileReader = new FileReader()
-              fileReader.onloadend = function() {
-                  $('#img4').attr('src', fileReader.result)
-              }
-              fileReader.readAsDataURL(file)
-            })
-          })
-          </script>
-          
-          <div class="col-5 d-flex align-items-center">
-            <label for="">Selecione a categoria: </label>
-            <select name="" id="" class="form-control">
-              <option value="">Roupas</option>
-              <option value="">Enxovais</option>
-              <option value="">Perfumes</option>
+          <div class="col-5 d-flex align-items-center my-2">
+            <label for="">Selecione a categoria </label>
+            <select name="categoria" id="" class="form-control">
+              <option value="roupas">Roupas</option>
+              <option value="enxovais">Enxovais</option>
+              <option value="perfumes">Perfumes</option>
             </select>
           </div>
 
-        </div>
+          <div class="col-2 d-flex align-items-center my-2">
+            <label for="">Tamanho</label>
+            <select name="tamanho" id="" class="form-control">
+              <option value="P">P</option>
+              <option value="M">M</option>
+              <option value="G">G</option>
+            </select>
+          </div>
+          <div class="col-2 d-flex align-items-center my-2">
+            <label for="">Estoque</label>
+            <input type="text" class="form-control" name="estoque">
+          </div>
 
+          <div class="col-8 d-flex align-items-center my-2">
+            <label for="">Descrição do produto </label>
+            <textarea class="form-control" name="descricao" id="" cols="100" rows="3"></textarea>
+          </div>
+
+        </div>
+        <button type="submit" class="btn btn-outline-info my-5">Cadastrar produto</button>
       </form>
   </div>
 

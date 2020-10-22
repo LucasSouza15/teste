@@ -20,15 +20,16 @@ use Illuminate\Support\Facades\Route;
  */
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('admin/home', 'PainelController@adminHome')->name('admin.home')->middleware('is_admin');
-Route::get('admin/dashboard', 'PainelController@dashboard')->name('admin.dashboard')->middleware('is_admin');
-Route::get('admin/adicionarProduto', 'PainelController@adicionarProduto')->name('admin.adcProduto')->middleware('is_admin');
-Route::get('admin/alterarProduto', 'PainelController@alterarProduto')->name('admin.altProduto')->middleware('is_admin');
-Route::get('admin/adicionarUsuario', 'PainelController@adicionarUsuario')->name('admin.adcUsuario')->middleware('is_admin');
-Route::get('admin/listarUsuario', 'PainelController@listarUsuario')->name('admin.listarUsuario')->middleware('is_admin');
-Route::get('admin/configuracoes/loja', 'PainelController@configLoja')->name('admin.configLoja')->middleware('is_admin');
-Route::get('admin/configuracoes/pagamento', 'PainelController@configPagamento')->name('admin.configPagamento')->middleware('is_admin');
+Route::view('/home', 'home')->name('home');
+Route::view('admin/home', 'home')->name('admin.home')->middleware('is_admin');
+Route::view('admin/dashboard', 'admin.HomeAdmin')->name('admin.dashboard')->middleware('is_admin');
+Route::view('admin/adicionarProduto', 'admin.adicionarProduto')->name('admin.adcProduto')->middleware('is_admin');
+Route::view('admin/alterarProduto', 'admin.alterarProduto')->name('admin.altProduto')->middleware('is_admin');
+Route::view('admin/adicionarUsuario', 'admin.Adicionarusuario')->name('admin.adcUsuario')->middleware('is_admin');
+Route::view('admin/listarUsuario', 'admin.listarUsuarios')->name('admin.listarUsuario')->middleware('is_admin');
+Route::view('admin/configuracoes/loja', 'admin.configLoja')->name('admin.configLoja')->middleware('is_admin');
+Route::view('admin/configuracoes/pagamento', 'admin.configPagamento')->name('admin.configPagamento')->middleware('is_admin');
+Route::post('admin/cadastroProduto', 'PainelController@cadastroDeProduto')->name('admin.adicionaProduto')->middleware('is_admin');
 
 
 
