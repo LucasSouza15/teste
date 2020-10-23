@@ -130,9 +130,37 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'img[]' => [
+            'image' => 'Escolha uma imagem',
+            'required' => 'Minimo de 1 imagem' 
         ],
+        'produto' => [
+            'required' => 'O nome é obrigatorio',
+            'min' => 'Minimo de 2 caracteres',
+        ],
+        'codico_produto' => [
+            'unique' => 'Esse codico ja existe',
+            'required' => 'O codigo é obrigatorio', 
+        ],
+        'descricao' => [
+            'required' => 'A descrição é obrigatoria',
+            'min' => 'Minimo de 2 caracteres',
+        ],
+        'promocao' => [
+            'required' => 'O preço é obrigatorio',
+        ],
+        'categoria' => [
+            'required' => 'A categoria é obrigatoria',
+        ],
+        'tamanho' => [
+            'required' => 'O tamanho é obrigatorio',
+        ],
+        'estoque' => [
+            'required' => 'O estoque é obrigatorio',
+        ],
+        'detalhes' => [
+            'min' => 'Minimo de 2 caracteres',
+        ]
     ],
 
     /*

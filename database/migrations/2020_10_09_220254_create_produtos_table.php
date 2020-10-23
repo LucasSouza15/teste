@@ -18,7 +18,8 @@ class CreateProdutosTable extends Migration
             $table->integer('codico_produto')->unique();
             $table->string('produto')->nullable();
             $table->text('descricao')->nullable();
-            $table->double('preco', 8,2)->nullable();
+            $table->double('preco_antigo', 8,2)->nullable();
+            $table->double('promocao', 8,2)->nullable();
             $table->string('detalhes')->nullable();
             $table->string('categoria')->nullable();
             $table->timestamps();
