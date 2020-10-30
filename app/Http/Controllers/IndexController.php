@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Estoques;
+
 use App\Models\Produtos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +17,6 @@ class IndexController extends Controller
     public function __construct()
     {
         $this->produtos = new Produtos();
-        $this->estoques = new Estoques();
     }
     public function index() {
         
@@ -27,22 +26,21 @@ class IndexController extends Controller
         return view('blank');
     }
     public function checkout($id) {
-        $estoques = Estoques::get()->where('codico_produto', $id);
+        
         $products = Produtos::where('codico_produto', $id)->first();
-        $total = Estoques::get()->sum('Qtd');
+        
         //dd($estoques);
         foreach ($estoques as $estoque) {
             $tamanhoPedido =  $_POST['tamanho'];
             $qtdPedida = $_POST['qtd'];
-            $TamanhoEstoque = $estoque->tamanho; 
-            $QtdEstoque = $estoque->Qtd;
+            $TamanhoEstoque = $products->tamanho; 
+            $QtdEstoque = $products->estoque;
             if($tamanhoPedido == $TamanhoEstoque && $qtdPedida <= $QtdEstoque) {
                 return view('checkout', [
                 'products' => $products,
-                'estoques' => $estoques,
             ]);
             } else {
-                return redirect()->action('IndexController@product', $estoque->codico_produto);
+                return redirect()->action('IndexController@product', $products->codico_produto);
                 //{{route('site.product',$products->codico_produto)}};
             }
         };
@@ -67,15 +65,11 @@ class IndexController extends Controller
         ]);
     }
     public function product($id) {
-        $estoques = Estoques::all()->where('codico_produto', $id);
-        $total = Estoques::get()->where('codico_produto', $id)->sum('Qtd');
         $products = Produtos::where('codico_produto', $id)->first();
         $productRelacionados = Produtos::paginate(5)->where('categoria', $products->categoria)->whereNotIn('codico_produto', $id);
         //dd($productRelacionados);
         return view('product', [
             'products' => $products,
-            'estoques' => $estoques,
-            'total' => $total,
             'productRelacionados' => $productRelacionados
         ]);
     } 

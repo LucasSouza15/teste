@@ -96,7 +96,7 @@
 						<!-- store products -->
 						<div class="row">
 							@foreach ($products as $product)
-								@if ($product->categoria == 'Roupas')
+								@if ($product->categoria == 'roupas')
 										<!-- product -->
 									<div class="col-md-4 col-xs-6">
 										<div class="product">
@@ -110,7 +110,7 @@
 											<div class="product-body">
 												<p class="product-category">{{$product->categoria}}</p>
 												<h3 class="product-name"><a href="#">{{$product->produto}}</a></h3>
-												<h4 class="product-price">{{$product->preco}}<del class="product-old-price">$990.00</del></h4>
+												<del class="product-old-price mr-1">{{$product->preco_antigo}}</del><h4 class="product-price">{{$product->promocao}}</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>

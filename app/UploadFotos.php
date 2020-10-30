@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class UploadFotos extends Model
 {
-    //
+    protected $fillable = ['img[]'];
 }

@@ -1,8 +1,10 @@
+
+
 @extends('admin.layouts.app')
 @section('conteudoAdmin')
 
   <div class="container">
-      <h1>Novo Produto</h1>
+      <h1>Editando produto #{{$products->codico_produto}}</h1>
   </div>
   @if(session(''))
     
@@ -17,8 +19,9 @@
   @endif
   
   <div class="border rounded p-4">
-        <form class="form" action="{{route('admin.adicionaProduto')}}" method="post" enctype="multipart/form-data">
+        <form class="form" action="{{route('admin.updateProduto', $products->codico_produto)}}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="form-row">
 
             <!-- Imagem 1 -->
@@ -34,7 +37,7 @@
 
           <div class="col-6 d-flex align-items-center">
             <label for="" class="mr-1">Nome do produto</label>
-            <input type="text" class="form-control" name="produto">
+            <input type="text" class="form-control" name="produto" value="{{$products->produto}}">
             @error('produto')
               <div class="invalid-feedback">
                 {{ $message }}
@@ -45,7 +48,7 @@
 
           <div class="col-3 d-flex align-items-center my-2 offset-1">
             <label for="" class="mr-1">Codigo</label>
-            <input type="text" class="form-control" name="codico_produto">
+            <input type="text" class="form-control" name="codico_produto" value="{{$products->codico_produto}}" disabled>
             @error('codico_produto')
               <span class="text-danger" style="font-size:10px;">{{ $message }}</span>
             @enderror
@@ -54,7 +57,7 @@
 
           <div class="col-3 d-flex align-items-center ">
             <label for="" class="mr-1">Preço antigo </label>
-            <input type="text" class="form-control" name="preco_antigo">
+            <input type="text" class="form-control" name="preco_antigo" value="{{$products->preco_antigo}}">
             @error('preco_antigo')
               <span class="text-danger" style="font-size:10px;">{{ $message }}</span>
             @enderror
@@ -63,8 +66,8 @@
 
          
           <div class="col-3 d-flex align-items-center">
-            <label for="" class="mr-1">Promoção </label>
-            <input type="text" class="form-control" name="promocao">
+            <label for="" class="mr-1">Promoção</label>
+            <input type="text" class="form-control" name="promocao" value="{{$products->promocao}}">
             @error('promocao')
               <span class="text-danger" style="font-size:10px;">{{ $message }}</span>
             @enderror
@@ -72,8 +75,8 @@
           
           
           <div class="col-4 d-flex align-items-center my-2">
-            <label for="" class="mr-1">Selecione a categoria </label>
-            <select name="categoria" id="" class="custom-select">
+            <label for="" class="mr-1">Selecione a categoria</label>
+            <select name="categoria" id="" class="custom-select" value="{{$products->categoria}}">
               <option value="roupas">Roupas</option>
               <option value="enxovais">Enxovais</option>
               <option value="perfumes">Perfumes</option>
@@ -86,7 +89,7 @@
 
           <div class="col-3 d-flex align-items-center my-2">
             <label for="" class="mr-1">Tamanho</label>
-            <select name="tamanho" id="" class="form-control">
+            <select name="tamanho" id="" class="form-control" value="{{$products->tamanho}}">
               <option value="P">P</option>
               <option value="M">M</option>
               <option value="G">G</option>
@@ -99,7 +102,7 @@
 
           <div class="col-3 d-flex align-items-center my-2">
             <label for="" class="mr-1">Estoque</label>
-            <input type="text" class="form-control" name="estoque">
+            <input type="text" class="form-control" name="estoque" value="{{$products->estoque}}">
             @error('estoque')
               <span class="text-danger" style="font-size:10px;">{{ $message }}</span>
             @enderror
@@ -107,8 +110,8 @@
           
 
           <div class="col-8 d-flex align-items-center my-2">
-            <label for="" class="mr-1" >Descrição do produto </label>
-            <textarea class="form-control" name="descricao" id="" cols="100" rows="3"></textarea>
+            <label for="" class="mr-1" >Descrição do produto</label>
+            <textarea class="form-control" name="descricao" id="" cols="100" rows="3">{{$products->descricao}}</textarea>
             @error('descricao')
               <span class="text-danger" style="font-size:10px;">{{ $message }}</span>
             @enderror
@@ -117,11 +120,11 @@
 
           <div class="col-8 d-flex align-items-center my-2">
             <label for="" class="mr-1">Detalhes do produto </label>
-            <textarea class="form-control" name="detalhes" id="" cols="100" rows="3"></textarea>
+            <textarea class="form-control" name="detalhes" id="" cols="100" rows="3">{{$products->detalhes}}</textarea>
           </div>
 
         </div>
-        <button type="submit" class="btn btn-outline-info my-5">Cadastrar produto</button>
+        <button type="submit" class="btn btn-outline-info my-5">Atualizar produto</button>
       </form>
   </div>
 
@@ -132,3 +135,4 @@
 </div>
 <!-- End of Main Content -->  
 @endsection
+
