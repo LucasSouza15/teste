@@ -9,7 +9,7 @@ use App\Models\Produtos;
 use App\UploadFotos;
 use Exception;
 
-class PainelController extends Controller
+class ProductController extends Controller
 {
     protected $request;
     private $repository;
@@ -32,20 +32,20 @@ class PainelController extends Controller
         try {
             
             $data = $request->all();
-            
+                $product = $this->repository->create($data);
                 for($i = 0; $i < count($request->allFiles()['img']); $i++) {
                     $file = $request->allFiles()['img'][$i];
                     $productImage = new UploadFotos();
                     $productImage->codico_produto = $request->codico_produto;
                     $productImage->path = $file->store('caminho/' . $productImage->codico_produto);
                     $productImage->save();
-                }
-                if($product = $this->repository->create($data)) {
+                };
+                if($productImage->save()) {
                     return redirect()->route('admin.adcProduto')
                 ->with('sucess', 'Cadastro feito com suscesso');
-                }
+                };
         }catch (Exception $e) {
-            //dd($e->getMessage());
+            dd($e->getMessage());
             return redirect()->route('admin.adcProduto')
             ->with('error', 'Cadastro falhou');
         }

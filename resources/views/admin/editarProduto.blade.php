@@ -3,8 +3,11 @@
 @extends('admin.layouts.app')
 @section('conteudoAdmin')
 
-  <div class="container">
-      <h1>Editando produto #{{$products->codico_produto}}</h1>
+  <div class="container row">
+    <a class="col-1" href="{{route('admin.altProduto')}}">
+      <i class="fas fa-arrow-circle-left fa-3x text-secondary"></i>
+    </a>
+    <h1 class="col-8">Editando produto #{{$products->codico_produto}}</h1>
   </div>
   @if(session(''))
     

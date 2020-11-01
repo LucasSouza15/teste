@@ -34,7 +34,6 @@
                             <i class="far fa-edit mx-1 fa-lg text-success"></i>
                           </a>
                         </button>
-                        
                         <form action="{{route('admin.deletarProduto' , $product->codico_produto)}}" method="post">
                           @csrf
                           @method('DELETE')

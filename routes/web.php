@@ -24,15 +24,20 @@ Route::view('/home', 'home')->name('home');
 Route::view('admin/home', 'home')->name('admin.home')->middleware('is_admin');
 Route::view('admin/dashboard', 'admin.HomeAdmin')->name('admin.dashboard')->middleware('is_admin');
 Route::view('admin/adicionarProduto', 'admin.adicionarProduto')->name('admin.adcProduto')->middleware('is_admin');
-Route::get('admin/editarProduto/{id}', 'PainelController@editarProduto')->name('admin.EditarProduto')->middleware('is_admin');
 Route::view('admin/adicionarUsuario', 'admin.Adicionarusuario')->name('admin.adcUsuario')->middleware('is_admin');
 Route::view('admin/listarUsuario', 'admin.listarUsuarios')->name('admin.listarUsuario')->middleware('is_admin');
 Route::view('admin/configuracoes/loja', 'admin.configLoja')->name('admin.configLoja')->middleware('is_admin');
 Route::view('admin/configuracoes/pagamento', 'admin.configPagamento')->name('admin.configPagamento')->middleware('is_admin');
-Route::post('admin/cadastroProduto', 'PainelController@cadastroDeProduto')->name('admin.adicionaProduto')->middleware('is_admin');
-Route::put('admin/updateProduto/{id}', 'PainelController@updateProduto')->name('admin.updateProduto')->middleware('is_admin');
-Route::get('admin/alterarProduto', 'PainelController@alterarProduto')->name('admin.altProduto')->middleware('is_admin');
-Route::delete('admin/deleteProduto/{id}', 'PainelController@deleteProduto')->name('admin.deletarProduto')->middleware('is_admin');
+
+// Metodos de Product
+Route::post('admin/cadastroProduto', 'ProductController@cadastroDeProduto')->name('admin.adicionaProduto')->middleware('is_admin');
+Route::get('admin/alterarProduto', 'ProductController@alterarProduto')->name('admin.altProduto')->middleware('is_admin');
+Route::delete('admin/deleteProduto/{id}', 'ProductController@deleteProduto')->name('admin.deletarProduto')->middleware('is_admin');
+Route::get('admin/editarProduto/{id}', 'ProductController@editarProduto')->name('admin.EditarProduto')->middleware('is_admin');
+Route::put('admin/updateProduto/{id}', 'ProductController@updateProduto')->name('admin.updateProduto')->middleware('is_admin');
+
+// Metodos de Usuarios
+
 
 
 
