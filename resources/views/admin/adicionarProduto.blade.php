@@ -17,7 +17,7 @@
   @endif
   
   <div class="border rounded p-4">
-        <form class="form" action="{{route('admin.adicionaProduto')}}" method="post" enctype="multipart/form-data">
+        <form class="form" action="{{route('admin.CadastroProduto')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-row">
 
@@ -76,7 +76,7 @@
             <select name="categoria" id="" class="custom-select">
               <option value="roupas">Roupas</option>
               <option value="enxovais">Enxovais</option>
-              <option value="perfumes">Perfumes</option>
+              <option value="cosmeticos">Cosmeticos</option>
             </select>
             @error('categoria')
               <span class="text-danger" style="font-size:10px;">{{ $message }}</span>

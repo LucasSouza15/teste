@@ -50,6 +50,7 @@
 <!-- Custom scripts for all pages-->
 <script src="{{asset('app-assets/js/sb-admin-2.min.js')}}"></script>
 
+<script src="{{asset('app-assets/js/demo/chart-bar-demo.js')}}"></script>
 
 
 

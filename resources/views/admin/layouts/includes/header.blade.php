@@ -11,6 +11,8 @@
 
   <title>Admin - Site Mãe</title>
 
+  
+
   <!-- Custom fonts for this template-->
   <link href="{{asset('app-assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -23,6 +25,16 @@
 
   <!-- FontWesome-->
 <script src="https://kit.fontawesome.com/e363fe7ed6.js" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
@@ -80,7 +92,7 @@
           <i class="fas fa-fw fa-folder"></i>
           <span>Usuarios</span>
         </a>
-        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header"></h6>
             <a class="collapse-item" href="{{route('admin.adcUsuario')}}">Adicionar Usuarios</a>
@@ -97,7 +109,7 @@
           <i class="fas fa-fw fa-cog"></i>
           <span>Configurações</span>
         </a>
-        <div id="collapseSettings" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseSettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header"></h6>
             <a class="collapse-item" href="{{route('admin.configLoja')}}">Loja</a>

@@ -98,12 +98,12 @@
 						<!-- store products -->
 						<div class="row">
 							@foreach ($products as $product)
-								@if ($product->categoria == 'Cosmeticos')
+								@if ($product->categoria == 'cosmeticos')
 										<!-- product -->
 									<div class="col-md-4 col-xs-6">
 										<div class="product">
 											<div class="product-img">
-														<img src="{{asset($product->caminho_foto1)}}" alt="">
+														{{-- <img src="{{asset($product->caminho_foto1)}}" alt=""> --}}
 												<div class="product-label">
 													<span class="sale">-30%</span>
 													<span class="new">NEW</span>

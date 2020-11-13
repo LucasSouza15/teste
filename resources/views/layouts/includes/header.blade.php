@@ -133,7 +133,9 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="{{route('admin.dashboard')}}" class="dropdown-item text-dark">Entrar no painel</a>
+                            @if (Auth::user()->is_admin <> '0')
+                                <a href="{{route('admin.dashboard')}}" class="dropdown-item text-dark">Entrar no painel</a>
+                            @endif
                             <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

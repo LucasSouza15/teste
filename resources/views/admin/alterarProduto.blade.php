@@ -28,7 +28,7 @@
                           @endif 
                         @endforeach
                       </th>
-                      <th scope="row">
+                      <th scope="row" class="row">
                         <button type="submit" class="btn">
                           <a href="{{route('admin.EditarProduto' , $product->codico_produto)}}">
                             <i class="far fa-edit mx-1 fa-lg text-success"></i>

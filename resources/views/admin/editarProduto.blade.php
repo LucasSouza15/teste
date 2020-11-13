@@ -82,7 +82,7 @@
             <select name="categoria" id="" class="custom-select" value="{{$products->categoria}}">
               <option value="roupas">Roupas</option>
               <option value="enxovais">Enxovais</option>
-              <option value="perfumes">Perfumes</option>
+              <option value="cosmeticos">Cosmeticos</option>
             </select>
             @error('categoria')
               <span class="text-danger" style="font-size:10px;">{{ $message }}</span>

@@ -8,5 +8,5 @@ class Produtos extends Model
 {
   protected $fillable = ['produto', 'codico_produto', 'descricao', 
                         'preco_antigo', 'promocao', 'detalhes', 
-                        'categoria','tamanho','estoque'];
+                        'categoria','tamanho','estoque', 'foto_principal'];
 }

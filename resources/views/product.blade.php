@@ -13,21 +13,11 @@
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto1)}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto2)}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto3)}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto4)}}" alt="" max-width="100%">
-							</div>
+							@foreach ($fotos as $foto)
+								<div class="product-preview">
+									<img src="{{asset('storage/' . $foto->path)}}" alt="">
+								</div>
+							@endforeach
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -35,21 +25,11 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto1)}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto2)}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto3)}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="{{asset($products->caminho_foto4)}}" alt="">
-							</div>
+							@foreach ($fotos as $foto)
+								<div class="product-preview">
+									<img src="{{asset('storage/' . $foto->path)}}" alt="">
+								</div>
+							@endforeach
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -63,9 +43,9 @@
 
 							</div>
 							<div>
-								<h3 class="product-price">{{$products->preco}}		<del class="product-old-price">		$990.00</del></h3>
+								<h3 class="product-price">{{$products->promocao}}		<del class="product-old-price">		{{$products->preco_antigo}}	</del></h3>
 								<span class="product-available">
-									Em estoque : {{$total}} itens
+									Em estoque : {{$products->estoque}} itens
 								</span>
 							</div>
 							<p>{{$products->descricao}}</p>
@@ -75,17 +55,8 @@
 							<div class="product-options">
 								<label>
 									Tamanho 
-									<select name="tamanho" class="input-select">
-										@foreach ($estoques as $estoque)
-											<option value="{{$estoque->tamanho}}">{{$estoque->tamanho}}</option>
-										@endforeach
-									</select>
-								
-										@foreach ($estoques as $estoque)
-											<span style="font-size: 10px;">{{$estoque->tamanho}}</span>
-											<span style="font-size: 10px;">({{$estoque->Qtd}}) </span>
-										@endforeach	
-							
+									<span>{{$products->tamanho}}</span>
+
 								</label>
 								
 								<label>

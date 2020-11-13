@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCreateProductRequest;
@@ -32,7 +34,19 @@ class ProductController extends Controller
         try {
             
             $data = $request->all();
-                $product = $this->repository->create($data);
+            $foto_principal = $request->allFiles()['img'][0];
+            $product = $this->repository->create([
+                'produto' => $data['produto'], 
+                'codico_produto' => $data['codico_produto'], 
+                'descricao' => $data['descricao'] , 
+                'preco_antigo' => $data['preco_antigo'], 
+                'promocao' => $data['promocao'] , 
+                'detalhes' => $data['detalhes'] , 
+                'categoria' => $data['categoria'] ,
+                'tamanho' => $data['tamanho'] ,
+                'estoque' => $data['estoque'],
+                'foto_principal' =>  $foto_principal->store('caminho/' . $request->codico_produto)
+            ]);
                 for($i = 0; $i < count($request->allFiles()['img']); $i++) {
                     $file = $request->allFiles()['img'][$i];
                     $productImage = new UploadFotos();
@@ -42,7 +56,7 @@ class ProductController extends Controller
                 };
                 if($productImage->save()) {
                     return redirect()->route('admin.adcProduto')
-                ->with('sucess', 'Cadastro feito com suscesso');
+                    ->with('sucess', 'Cadastro feito com suscesso');
                 };
         }catch (Exception $e) {
             dd($e->getMessage());

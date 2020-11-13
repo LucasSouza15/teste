@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produtos;
+use App\UploadFotos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -12,11 +13,13 @@ use Illuminate\Pagination\Paginator;
 
 class IndexController extends Controller
 {
-    private $estoques;
+    private $fotos;
     private $produtos;
-    public function __construct()
+    public function __construct(Produtos $products, UploadFotos $fotos)
     {
-        $this->produtos = new Produtos();
+        $this->fotos = $fotos;
+        $this->products = $products;
+
     }
     public function index() {
         
@@ -29,27 +32,30 @@ class IndexController extends Controller
         
         $products = Produtos::where('codico_produto', $id)->first();
         
-        //dd($estoques);
-        foreach ($estoques as $estoque) {
-            $tamanhoPedido =  $_POST['tamanho'];
-            $qtdPedida = $_POST['qtd'];
-            $TamanhoEstoque = $products->tamanho; 
-            $QtdEstoque = $products->estoque;
-            if($tamanhoPedido == $TamanhoEstoque && $qtdPedida <= $QtdEstoque) {
+        //dd($estoques)
+       
+            // $tamanhoPedido =  $_POST['tamanho'];
+            // $qtdPedida = $_POST['qtd'];
+            // $TamanhoEstoque = $products->tamanho; 
+            // $QtdEstoque = $products->estoque;
+            // if($tamanhoPedido == $TamanhoEstoque && $qtdPedida <= $QtdEstoque) {
                 return view('checkout', [
                 'products' => $products,
-            ]);
-            } else {
-                return redirect()->action('IndexController@product', $products->codico_produto);
-                //{{route('site.product',$products->codico_produto)}};
-            }
-        };
-     
+             ]);
+            // } else {
+            //     return redirect()->action('IndexController@product', $products->codico_produto);
+            //     //{{route('site.product',$products->codico_produto)}};
+            // }
     }
+     
+
     public function StoreEnxovais() {
-        $products = Produtos::paginate();
+        $products =  $this->products->where('categoria', 'enxovais')->paginate();
+        $fotos = $this->fotos->get(); 
+        //dd($fotos);    
         return view('StoreEnxovais', [
             'products' => $products,
+            'fotos' => $fotos,
         ]);
     }
     public function StoreCosmeticos() {
@@ -65,11 +71,14 @@ class IndexController extends Controller
         ]);
     }
     public function product($id) {
-        $products = Produtos::where('codico_produto', $id)->first();
-        $productRelacionados = Produtos::paginate(5)->where('categoria', $products->categoria)->whereNotIn('codico_produto', $id);
+        $products = $this->products->where('codico_produto', $id)->first();
+        $fotos = $this->fotos->get()->where('codico_produto', $products->codico_produto); 
+        //dd($fotos);
+        $productRelacionados = $this->products->paginate(5)->where('categoria', $products->categoria)->whereNotIn('codico_produto', $id);
         //dd($productRelacionados);
         return view('product', [
             'products' => $products,
+            'fotos' => $fotos,
             'productRelacionados' => $productRelacionados
         ]);
     } 
